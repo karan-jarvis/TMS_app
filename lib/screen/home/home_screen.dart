@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     switch (homeCnt.isTab.value) {
       case "DashBoardScreen":
         {
-          return const DashBoardScreen();
+          return DashBoardScreen();
         }
       case "UserScreen":
         {
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         }
       case "LeaveScreen":
         {
-          return const LeaveScreen();
+          return LeaveScreen();
         }
       case "ReportScreen":
         {
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
         }
       case "HolidayScreen":
         {
-          return const HolidaysScreen();
+          return HolidaysScreen();
         }
       case "AddUser":
         {

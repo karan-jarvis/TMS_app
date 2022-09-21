@@ -14,7 +14,7 @@ import 'package:tms_app/widget/common_button.dart';
 class AddMemberController extends GetxController {
   RxBool isLoading = false.obs;
 
-  String memberRole = "";
+  RxString memberRole = "Team Member".obs;
 
   final user = FirebaseAuth.instance;
   HomeController homeCnt = Get.find<HomeController>();
@@ -71,13 +71,13 @@ class AddMemberController extends GetxController {
     //checkBankDetail(bankDetailController.value.text);
     checkAddress(residentAddressController.value.text);
     checkPassword(passwordController.value.text);
-    if (nameError == "" &&
-        emailError == "" &&
-        phoneError == "" &&
-        residentAddressError == "" &&
-        passwordError == "") {
+    // if (nameError == "" &&
+    //     emailError == "" &&
+    //     phoneError == "" &&
+    //     residentAddressError == "" &&
+    //     passwordError == "") {
       homeCnt.isTab.value = "AddUserTwo";
-    }
+    //}
   }
 
   Future<void> onCreate(context) async {
@@ -120,7 +120,7 @@ class AddMemberController extends GetxController {
       'account_holder_name': holderNameController.value.text,
       'bank_name': bankNameController.value.text,
       'reference_name': refController.value.text,
-      'role': memberRole
+      'role': memberRole.value
     }).then((value) {
       userCnt.getUserData();
       homeCnt.isTab.value = "UserScreen";

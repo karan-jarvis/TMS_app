@@ -176,13 +176,14 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
                   CommonButton(
                       title: "Next",
                       onPressed: () {
-                        if (addMemberCnt.profilePic == "") {
-                          showSnackBar(
-                              context: context,
-                              title: "Select the profile photo");
-                        } else {
+                        //Todo:-  change before submit
+                        // if (addMemberCnt.profilePic == "") {
+                        //   showSnackBar(
+                        //       context: context,
+                        //       title: "Select the profile photo");
+                        // } else {
                           addMemberCnt.onSubmit(context);
-                        }
+                        //}
                       }),
                   const SizedBox(
                     height: 50,

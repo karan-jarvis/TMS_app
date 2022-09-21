@@ -54,22 +54,22 @@ class _AddMemberScreen2State extends State<AddMemberScreen2> {
                   const SizedBox(
                     height: 30,
                   ),
-                  DropdownButton<String>(
-                      isExpanded: true, //Adding this property, does the magic
-                      hint: const Text("Select the role"),
-                      items: const [
-                        DropdownMenuItem(
-                          child: Text("Team Member",
-                              overflow: TextOverflow.ellipsis),
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Team Leader",
-                              overflow: TextOverflow.ellipsis),
-                        ),
-                      ],
-                      onChanged: (val) {
-                        //print(val);
-                      }),
+                  Obx(
+                    () => DropdownButton<String>(
+                      value: addMemberCnt.memberRole.value,
+                      isDense: true,
+                      hint: Text("Select The Role"),
+                      onChanged: (String? newValue) {
+                        addMemberCnt.memberRole.value = newValue!;
+                      },
+                      items: ['Team Member', "Team Leader"].map((String value) {
+                        return DropdownMenuItem(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
