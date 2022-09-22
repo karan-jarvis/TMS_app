@@ -9,6 +9,7 @@ import 'package:tms_app/utils/route_generator.dart';
 import 'firebase_options.dart';
 import 'utils/prefrences/prefrences.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreference().initialAppPreference();

@@ -6,7 +6,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tms_app/screen/add_member/add_member_screen_2.dart';
 import 'package:tms_app/screen/home/home_controller.dart';
 import 'package:tms_app/screen/home/home_screens/user/user_controller.dart';
 import 'package:tms_app/widget/common_button.dart';

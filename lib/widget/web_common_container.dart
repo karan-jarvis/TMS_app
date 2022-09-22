@@ -17,13 +17,14 @@ class WebCommonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("TMS"),
-        centerTitle: true,
+        backgroundColor: AppColors.color6C0BA9,
+        title: Text(homeCnt.appBarTitle.value),
+        centerTitle: false,
         automaticallyImplyLeading: Responsive.isTablet(context) ? true : false,
-        actions: const [
+        actions: [
           Padding(
             padding: EdgeInsets.only(right: 30),
-            child: Center(child: Text("Hello, Demo")),
+            child: Center(child: Text("Hello, ${homeCnt.userName.value}")),
           )
         ],
       ),

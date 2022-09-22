@@ -41,7 +41,7 @@ class LoginController extends GetxController {
       ))
           .user!;
       log(user.email!, name: "UserMail");
-      if (user.email == "demo@123.com") {
+      if (user.email == "admin2522@yopmail.com") {
         await AppPreference().setBool(PreferencesKey.isLogin, true);
         Get.offAllNamed(RoutesConstants.homeScreen);
       }

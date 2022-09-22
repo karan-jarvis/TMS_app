@@ -11,10 +11,21 @@ class CommonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      onPressed: onPressed,
-      child: Text(title),
-      color: AppColors.color83B4CF,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: [
+          Expanded(
+            child: CupertinoButton(
+              onPressed: onPressed,
+              alignment: Alignment.center,
+              borderRadius: BorderRadius.circular(30),
+              child: Text(title),
+              color: AppColors.color6C0BA9,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
