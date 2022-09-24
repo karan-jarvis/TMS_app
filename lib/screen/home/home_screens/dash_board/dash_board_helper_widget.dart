@@ -21,11 +21,11 @@ class SquareDetailBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(title,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
                     color: AppColors.colorA44CD3)),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(value,

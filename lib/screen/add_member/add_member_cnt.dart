@@ -12,6 +12,7 @@ import 'package:tms_app/widget/common_button.dart';
 
 class AddMemberController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool isLoadingPanCard = false.obs;
 
   RxString memberRole = "Team Member".obs;
 
@@ -75,7 +76,7 @@ class AddMemberController extends GetxController {
     //     phoneError == "" &&
     //     residentAddressError == "" &&
     //     passwordError == "") {
-      homeCnt.isTab.value = "AddUserTwo";
+    homeCnt.isTab.value = "AddUserTwo";
     //}
   }
 
@@ -89,6 +90,7 @@ class AddMemberController extends GetxController {
         ifscCodeError == "" &&
         bankNameError == "" &&
         holderNameError == "") {
+
       user
           .createUserWithEmailAndPassword(
               email: emailController.value.text,

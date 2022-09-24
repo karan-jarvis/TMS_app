@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tms_app/screen/home/home_controller.dart';
-import 'package:tms_app/screen/login/login_screen.dart';
 import 'package:tms_app/utils/color_utils.dart';
 import 'package:tms_app/utils/prefrences/prefrences.dart';
 import 'package:tms_app/utils/route_constants.dart';
@@ -35,6 +34,25 @@ class SideDrawerWidget extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network(
+                          "https://www.pngitem.com/pimgs/m/226-2260470_transparent-admin-icon-png-admin-logo-png-png.png",
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("Hello, ${homeCnt.userName.value}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25,
+                            color: AppColors.black)),
+                    SizedBox(
+                      height: 30,
+                    ),
                     ImageTitleWidget(
                       onTap: () {
                         homeCnt.isTab.value = "DashBoardScreen";
@@ -51,8 +69,12 @@ class SideDrawerWidget extends StatelessWidget {
                         homeCnt.isTab.value = "UserScreen";
                         Get.back();
                       },
-                      isShowArrow:
-                          homeCnt.isTab.value == "UserScreen" || homeCnt.isTab.value == "AddUser" || homeCnt.isTab.value == "AddUserTwo"|| homeCnt.isTab.value == "BankDetail"  ? true : false,
+                      isShowArrow: homeCnt.isTab.value == "UserScreen" ||
+                              homeCnt.isTab.value == "AddUser" ||
+                              homeCnt.isTab.value == "AddUserTwo" ||
+                              homeCnt.isTab.value == "BankDetail"
+                          ? true
+                          : false,
                       titleLabel: "User",
                       containerWidth: 350.w,
                     ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:tms_app/screen/home/home_controller.dart';
 import 'package:tms_app/screen/home/home_screens/dash_board/dash_board_helper_widget.dart';
 import 'package:tms_app/screen/home/home_screens/user/user_controller.dart';
-import 'package:tms_app/utils/color_utils.dart';
 
 class DashBoardScreen extends StatelessWidget {
   DashBoardScreen({Key? key}) : super(key: key);
@@ -36,7 +35,7 @@ class DashBoardScreen extends StatelessWidget {
                       ),
                       SquareDetailBox(
                           title: "Leave Req.",
-                          value: userController.totalUser.toString())
+                          value: userController.totalLeave.toString())
                     ],
                   ),
                 )
