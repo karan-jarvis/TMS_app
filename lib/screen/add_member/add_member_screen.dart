@@ -19,10 +19,10 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
 
   @override
   Widget build(BuildContext context) {
-    addMemberCnt.nameController.value.text = "Karan";
-    addMemberCnt.emailController.value.text = "Karan@dev.com";
-    addMemberCnt.phoneController.value.text = "2522151431";
-    addMemberCnt.residentAddressController.value.text = "e-1";
+    // addMemberCnt.nameController.value.text = "Karan";
+    // addMemberCnt.emailController.value.text = "Karan@dev.com";
+    // addMemberCnt.phoneController.value.text = "2522151431";
+    // addMemberCnt.residentAddressController.value.text = "e-1";
     return Obx(
       () => Padding(
         padding: const EdgeInsets.only(top: 20, left: 100, right: 100),
@@ -188,13 +188,13 @@ class _AddMemberScreenState extends State<AddMemberScreen> {
                           title: "Next",
                           onPressed: () {
                             //Todo:-  change before submit
-                            // if (addMemberCnt.profilePic == "") {
-                            //   showSnackBar(
-                            //       context: context,
-                            //       title: "Select the profile photo");
-                            // } else {
-                            addMemberCnt.onSubmit(context);
-                            //}
+                            if (addMemberCnt.profilePic == "") {
+                              showSnackBar(
+                                  context: context,
+                                  title: "Select the profile photo");
+                            } else {
+                              addMemberCnt.onSubmit(context);
+                            }
                           }),
                     ),
                     const SizedBox(

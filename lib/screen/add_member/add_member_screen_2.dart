@@ -178,27 +178,29 @@ class _AddMemberScreen2State extends State<AddMemberScreen2> {
                       if (image != null) {
                         var selectedImage = await image.readAsBytes();
                         panCardPicture = selectedImage;
-                        addMemberCnt.isLoading.value = true;
+
+                        addMemberCnt.isLoadingPanCard.value = true;
+
                         final mountainsRef =
-                            storageRef.child("PanCard/${image.name}");
+                            storageRef.child("PanCardImages/${image.name}");
 
                         try {
                           // Upload raw data.
-                          await mountainsRef.putData(aadhaarCardPicture);
+                          await mountainsRef.putData(panCardPicture);
                           addMemberCnt.panCardPic =
                               await mountainsRef.getDownloadURL();
                           if (kDebugMode) {
                             print(
                                 "addMemberCnt.panCardPic :- ${addMemberCnt.panCardPic}");
                           }
-                          addMemberCnt.isLoading.value = false;
+                          addMemberCnt.isLoadingPanCard.value = false;
                         } catch (e) {
                           // ...
                           if (kDebugMode) {
                             print(e.toString());
                           }
                           showSnackBar(context: context, title: e.toString());
-                          addMemberCnt.isLoading.value = false;
+                          addMemberCnt.isLoadingPanCard.value = false;
                         }
                       } else {
                         if (kDebugMode) {
@@ -214,30 +216,102 @@ class _AddMemberScreen2State extends State<AddMemberScreen2> {
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all()),
                       alignment: Alignment.center,
-                      child: addMemberCnt.panCardPic == ""
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.add),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Add Pan Card Photo",
-                                  textAlign: TextAlign.center,
+                      child: addMemberCnt.isLoadingPanCard.value
+                          ? const CircularProgressIndicator()
+                          : addMemberCnt.panCardPic == ""
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.add),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Add Pan Card Photo",
+                                      textAlign: TextAlign.center,
+                                    )
+                                  ],
                                 )
-                              ],
-                            )
-                          : ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: panCardPicture,
-                                image: addMemberCnt.panCardPic,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: panCardPicture,
+                                    image: addMemberCnt.panCardPic,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                     ),
                   ),
+                  // InkWell(
+                  //   onTap: () async {
+                  //     final ImagePicker picker = ImagePicker();
+                  //     XFile? image =
+                  //         await picker.pickImage(source: ImageSource.gallery);
+                  //     if (image != null) {
+                  //       var selectedImage = await image.readAsBytes();
+                  //       panCardPicture = selectedImage;
+                  //       addMemberCnt.isLoadingPanCard.value = true;
+                  //       final mountainsRef =
+                  //           storageRef.child("PanCard/${image.name}");
+                  //
+                  //       try {
+                  //         // Upload raw data.
+                  //         await mountainsRef.putData(aadhaarCardPicture);
+                  //         addMemberCnt.panCardPic =
+                  //             await mountainsRef.getDownloadURL();
+                  //         if (kDebugMode) {
+                  //           print(
+                  //               "addMemberCnt.panCardPic :- ${addMemberCnt.panCardPic}");
+                  //         }
+                  //         addMemberCnt.isLoadingPanCard.value = false;
+                  //       } catch (e) {
+                  //         // ...
+                  //         if (kDebugMode) {
+                  //           print(e.toString());
+                  //         }
+                  //         showSnackBar(context: context, title: e.toString());
+                  //         addMemberCnt.isLoadingPanCard.value = false;
+                  //       }
+                  //     } else {
+                  //       if (kDebugMode) {
+                  //         print("Image not selected");
+                  //       }
+                  //     }
+                  //   },
+                  //   child: Container(
+                  //     height: 200,
+                  //     width: 250,
+                  //     padding: const EdgeInsets.all(10),
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(20),
+                  //         border: Border.all()),
+                  //     alignment: Alignment.center,
+                  //     child: addMemberCnt.isLoadingPanCard.value
+                  //         ? CircularProgressIndicator()
+                  //         : addMemberCnt.panCardPic == ""
+                  //             ? Column(
+                  //                 mainAxisAlignment: MainAxisAlignment.center,
+                  //                 children: const [
+                  //                   Icon(Icons.add),
+                  //                   SizedBox(
+                  //                     height: 10,
+                  //                   ),
+                  //                   Text(
+                  //                     "Add Pan Card Photo",
+                  //                     textAlign: TextAlign.center,
+                  //                   )
+                  //                 ],
+                  //               )
+                  //             : ClipRRect(
+                  //                 borderRadius: BorderRadius.circular(10),
+                  //                 child: FadeInImage.memoryNetwork(
+                  //                   placeholder: panCardPicture,
+                  //                   image: addMemberCnt.panCardPic,
+                  //                   fit: BoxFit.fill,
+                  //                 ),
+                  //               ),
+                  //   ),
+                  // ),
                 ],
               ),
               const SizedBox(

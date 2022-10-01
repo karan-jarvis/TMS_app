@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:textfield_search/textfield_search.dart';
@@ -115,15 +116,15 @@ class UserScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 30,
                       ),
                       Obx(
                         () => DropdownButton<String>(
-                          disabledHint: Text("Disable Hint"),
+                          disabledHint: const Text("Disable Hint"),
                           value: userController.filterMemberRole.value,
                           isDense: true,
-                          hint: Text("Select The Role"),
+                          hint: const Text("Select The Role"),
                           onChanged: (String? newValue) {
                             userController.filterMemberRole.value = newValue!;
                             userController.filterSearchResults(newValue);
@@ -237,9 +238,74 @@ class UserScreen extends StatelessWidget {
                                                   fontSize: 18)),
                                         )
                                       : const SizedBox(),
-                                  Text(
-                                      " - ${userController.items[index].phone}",
-                                      textAlign: TextAlign.start),
+                                  Row(
+                                    children: [
+                                      Text(
+                                          " - ${userController.items[index].phone}",
+                                          textAlign: TextAlign.start),
+                                      const Spacer(),
+                                      IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.edit,
+                                            color: Colors.green),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                    contentPadding:
+                                                        const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 30,
+                                                            vertical: 10),
+                                                    title: Text(
+                                                        'Do you want to delete? ${userController.items[index].email}'),
+                                                    actions: <Widget>[
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 20),
+                                                        child: Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child:
+                                                                  CommonButton(
+                                                                title: "No",
+                                                                onPressed: () {
+                                                                  Get.back();
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child:
+                                                                  CommonButton(
+                                                                      title:
+                                                                          "Yes",
+                                                                      onPressed:
+                                                                          () async {
+                                                                        userController
+                                                                            .deleteData(index);
+                                                                      }),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      )
+                                                    ],
+                                                  ));
+                                        },
+                                        icon: const Icon(Icons.delete_rounded,
+                                            color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),

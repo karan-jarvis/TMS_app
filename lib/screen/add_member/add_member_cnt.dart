@@ -90,7 +90,6 @@ class AddMemberController extends GetxController {
         ifscCodeError == "" &&
         bankNameError == "" &&
         holderNameError == "") {
-
       user
           .createUserWithEmailAndPassword(
               email: emailController.value.text,
@@ -110,6 +109,7 @@ class AddMemberController extends GetxController {
     // Call the user's CollectionReference to add a new user
     return users.add({
       'full_name': nameController.value.text,
+      'password': passwordController.value.text,
       'email': emailController.value.text,
       'phone_number': phoneController.value.text,
       'address': residentAddressController.value.text,

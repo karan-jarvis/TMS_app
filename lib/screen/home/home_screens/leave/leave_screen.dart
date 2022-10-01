@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tms_app/screen/home/home_screens/leave/leave_controller.dart';
 import 'package:tms_app/screen/home/home_screens/user/user_controller.dart';
+import 'package:tms_app/utils/color_utils.dart';
 
 class LeaveScreen extends StatelessWidget {
   LeaveScreen({Key? key}) : super(key: key);
@@ -11,8 +13,199 @@ class LeaveScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(),
+    return Obx(
+      () => userController.isLoading.value
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Tootle Leave Request:  ${userController.totalLeave}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: AppColors.color6C0BA9),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: userController.leaveList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  index == 0
+                                      ? const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 25),
+                                          child: Text(
+                                            "Employee Name",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.color6C0BA9,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                  Text(
+                                      " - ${userController.leaveList[index].name}",
+                                      textAlign: TextAlign.start),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  index == 0
+                                      ? const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 25),
+                                          child: Text(
+                                            "Email address",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.color6C0BA9,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                  Text(
+                                      " - ${userController.leaveList[index].email}",
+                                      textAlign: TextAlign.start),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  index == 0
+                                      ? const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 25),
+                                          child: Text(
+                                            "Leave Description",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColors.color6C0BA9,
+                                                fontSize: 18),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                  Text(
+                                      " - ${userController.leaveList[index].description}",
+                                      textAlign: TextAlign.start),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    index == 0
+                                        ? const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 25),
+                                            child: Text(
+                                              "Leave Approval",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.color6C0BA9,
+                                                  fontSize: 18),
+                                            ),
+                                          )
+                                        : const SizedBox(),
+                                    userController.leaveList[index].isApproved ==
+                                                "true" ||
+                                            userController.leaveList[index]
+                                                    .isApproved ==
+                                                "false"
+                                        ? Text(
+                                            userController.leaveList[index]
+                                                        .isApproved ==
+                                                    "true"
+                                                ? "Approved"
+                                                : "Decline",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15,
+                                                color: AppColors.color6C0BA9),
+                                          )
+                                        : Row(
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.all(2),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.green,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: IconButton(
+                                                  onPressed: () =>
+                                                      userController.approveLeave(
+                                                          index: index,
+                                                          isApproved: "true"),
+                                                  icon: const Icon(
+                                                      Icons.done_outlined,
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                              SizedBox(width: 20),
+                                              Container(
+                                                padding: EdgeInsets.all(2),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: IconButton(
+                                                  onPressed: () =>
+                                                      userController.approveLeave(
+                                                          index: index,
+                                                          isApproved: "false"),
+                                                  icon: const Icon(Icons.close,
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
     );
   }
 }
